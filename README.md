@@ -1,4 +1,3 @@
-Markdown
 # ⚡ Machine Learning Task Balancer & Live Telemetry Engine
 
 An asynchronous, application-level distributed load balancer engineered to prevent host resource starvation and thread choking during concurrent, heavy AI/Computer Vision model executions. 
@@ -12,41 +11,40 @@ An asynchronous, application-level distributed load balancer engineered to preve
 
 ---
 
-## 🛠️ Architecture & Workflow
+## 🛠️ System Architecture Flow
 
-The architecture uses a strict, linear pipeline ensuring decoupled orchestration and zero drop rates on peak loads:
+The architecture operates on a decoupled, linear pipeline to guarantee zero drop rates under peak computing loads:
 
-```mermaid
-graph LR
-    Frontend --> Gateway
-    Gateway --> Workers
-    Workers --> Diagnostics
-📋 Step-by-Step System Flow:
-Inject Workload: Client submits single or bulk inference tasks through the React Dashboard.
+* **[ React/TS Dashboard ]** ──( 1. Inject Workload )──> **[ FastAPI + Redis Gateway ]**
+* **[ FastAPI + Redis Gateway ]** ──( 2. Balance & Distribute )──> **[ Parallel Worker Nodes ]**
+* **[ Parallel Worker Nodes ]** ──( 3. Stream Telemetry )──> **[ WebSockets Protocol ]**
+* **[ WebSockets Protocol ]** ──( 4. Live Updates )──> **[ React Diagnostics UI ]**
 
-Metadata Parsing: FastAPI catches the payload, parses metrics (batch size, domain configurations), and pushes tasks securely onto a micro-second Redis Queue.
+### 📋 Step-by-Step Execution:
+1. **Inject Workload:** Client submits single or bulk inference tasks through the React Dashboard.
+2. **Metadata Parsing:** FastAPI catches the payload, parses metrics (batch size, domain configurations), and pushes tasks securely onto a micro-second **Redis Queue**.
+3. **Compute Execution:** Decoupled operational worker nodes pull from the queue, preventing thread blocking on the core API.
+4. **Live Telemetry Stream:** The worker layers run `psutil` diagnostics to monitor immediate compute delta triggers (+15% CPU / +45MB RAM spikes) and stream them back to the frontend dashboard over low-latency **WebSockets**.
 
-Compute Execution: Decoupled operational worker nodes pull from the queue, preventing thread blocking on the core API.
+---
 
-Live Telemetry Stream: The worker layers run psutil diagnostics to monitor immediate compute delta triggers (+15% CPU / +45MB RAM spikes) and stream them back to the frontend dashboard over low-latency WebSockets.
+## 🧰 Tech Stack & Tools
 
-🧰 Tech Stack & Tools
-Backend Orchestration: FastAPI, Uvicorn (Asynchronous Gateway)
+* **Backend Orchestration:** FastAPI, Uvicorn (Asynchronous Gateway)
+* **Message Queue & Cache:** Redis (Distributed Task Queuing)
+* **Frontend Dashboard:** React.js, TypeScript, Tailwind CSS
+* **System Monitoring:** Python `psutil` (Bare-metal telemetry tracking)
+* **Communication Protocol:** WebSockets (Real-time duplex streaming)
 
-Message Queue & Cache: Redis (Distributed Task Queuing)
+---
 
-Frontend Dashboard: React.js, TypeScript, Tailwind CSS
+## 💻 Quick Start & Setup
 
-System Monitoring: Python psutil (Bare-metal telemetry tracking)
+### Prerequisites
+Ensure you have **Python 3.10+**, **Node.js**, and **Redis Server** installed.
 
-Communication Protocol: WebSockets (Real-time duplex streaming)
-
-💻 Quick Start & Setup
-Prerequisites
-Ensure you have Python 3.10+, Node.js, and Redis Server installed.
-
-1. Clone the Repository
-Bash
+### 1. Clone the Repository
+```bash
 git clone [https://github.com/YOUR_USERNAME/ml-task-balancer.git](https://github.com/YOUR_USERNAME/ml-task-balancer.git)
 cd ml-task-balancer
 2. Backend Installation (FastAPI & Redis)
