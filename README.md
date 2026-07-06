@@ -6,7 +6,7 @@ An asynchronous, application-level distributed load balancer engineered to preve
 
 ## 🚀 The Core Problem & Solution
 
-**Problem:** When serving resource-heavy ML workloads (like YOLO, MediaPipe, or LLM inferences), local servers easily experience hardware starvation, thread blocking, and immediate system crashes under peak loads.
+**Problem:** When serving resource-heavy ML workloads (like YOLO, MediaPipe, or LLM inferences), local servers easily experience hardware starvation, thread blocking, and immediate system crashes under peak loads.  
 **Solution:** This system intercepts incoming workloads, parses metadata to classify them into distinct cost tiers, routes them through a Redis-backed queue to parallel worker nodes, and tracks bare-metal hardware delta changes in real time.
 
 ---
@@ -59,7 +59,7 @@ Ensure you have Python 3.10+, Node.js, and Redis Server installed.
 
 1. Clone the Repository
 Bash
-git clone [https://github.com/YOUR_USERNAME/ml-task-balancer.git](https://github.com/YOUR_USERNAME/ml-task-balancer.git)
+git clone https://github.com/YOUR_USERNAME/ml-task-balancer.git
 cd ml-task-balancer
 2. Backend Installation (FastAPI & Redis)
 Bash
