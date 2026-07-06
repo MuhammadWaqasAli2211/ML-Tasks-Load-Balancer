@@ -1,3 +1,4 @@
+Markdown
 # ⚡ Machine Learning Task Balancer & Live Telemetry Engine
 
 An asynchronous, application-level distributed load balancer engineered to prevent host resource starvation and thread choking during concurrent, heavy AI/Computer Vision model executions. 
@@ -17,22 +18,9 @@ The architecture uses a strict, linear pipeline ensuring decoupled orchestration
 
 ```mermaid
 graph LR
-    %% Styling
-    classDef UI fill:#1e1e2e,stroke:#cba6f7,stroke-width:2px,color:#cdd6f4;
-    classDef API fill:#313244,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4;
-    classDef Worker fill:#11111b,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4;
-
-    %% Components
-    Frontend[React/TS Dashboard]:::UI
-    Gateway[FastAPI + Redis Orchestrator]:::API
-    Workers[Parallel Worker Nodes]:::Worker
-    Diagnostics[Isolated Resource Report]:::UI
-
-    %% Linear Flow
-    Frontend -->|1. Inject Workload| Gateway
-    Gateway  -->|2. Balance & Distribute| Workers
-    Workers  -->|3. Stream Telemetry Metrics| Gateway
-    Gateway  -->|4. Render Live Diagnostics| Diagnostics
+    Frontend --> Gateway
+    Gateway --> Workers
+    Workers --> Diagnostics
 📋 Step-by-Step System Flow:
 Inject Workload: Client submits single or bulk inference tasks through the React Dashboard.
 
@@ -59,7 +47,7 @@ Ensure you have Python 3.10+, Node.js, and Redis Server installed.
 
 1. Clone the Repository
 Bash
-git clone https://github.com/YOUR_USERNAME/ml-task-balancer.git
+git clone [https://github.com/YOUR_USERNAME/ml-task-balancer.git](https://github.com/YOUR_USERNAME/ml-task-balancer.git)
 cd ml-task-balancer
 2. Backend Installation (FastAPI & Redis)
 Bash
@@ -69,7 +57,7 @@ cd backend
 # Install dependencies
 pip install -r requirements.txt
 
-# Start Redis Server (Make sure Redis is running on local port 6379)
+# Start Redis Server
 redis-server
 
 # Run the FastAPI server
